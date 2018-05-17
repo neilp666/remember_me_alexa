@@ -20,5 +20,16 @@ var Handler = {
     }
     this.attributes.Place[ThingName] = PlaceName;
     this.emit(':tell', "I will remember that your " + ThingName + " is in your " + PlaceName);
+  },
+  "TellIntent": function() {
+    var ThingName = this.event.request.intent.slots.ThingName.value;
+    if(this.attributes.Place[ThingName]){
+      this.emit(':tell', "Your " + ThingName + " is in " + this.attributes.Place[ThingName]);
+    } else {
+      this.emit(':tell', "I don't know where your " + ThingName + "is ");
+    }
+  },
+  "AMAZON.CancelIntent": function () {
+    this.emit(':tell', "Thank You");
   }
 };
